@@ -6,6 +6,7 @@
   "jsnext:main": "src/index.js",
   "scripts": {
     "build": "babel src -d lib",
+    "prepublish": "npm run build",
     "test": "npm run build && standard && tape -r babel-core/register tests/*.test.js tests/integration/*.test.js | tap-spec"
   },
   "repository": {
@@ -54,6 +55,7 @@
     "cfs": "^0.5.0",
     "klaw": "^1.1.2",
     "moment": "^2.10.6",
+    "through2": "^2.0.0",
     "ymd": "^1.0.0"
   }
 }

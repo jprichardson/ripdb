@@ -14,8 +14,8 @@ let prfn = (baseDir) => (data, encoding) => {
   return path.join(dir, d.ymd + '.ndjson')
 }
 
-export default function createWriter (dir) {
-  let writer = cfs.createWriteStream(prfn(dir), { flags: 'a+' })
+export default function createWriter (dbDir) {
+  let writer = cfs.createWriteStream(prfn(dbDir), { flags: 'a+' })
 
   let oldWrite = writer.write
   writer.write = function ({ t, d }) {

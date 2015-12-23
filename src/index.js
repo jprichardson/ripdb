@@ -1,3 +1,4 @@
+import createReader from './reader'
 import createWriter from './writer'
 
 export default class RipDB {
@@ -12,7 +13,7 @@ export default class RipDB {
   }
 
   createReader () {
-
+    return createReader(this._path)
   }
 
   createWriter () {
