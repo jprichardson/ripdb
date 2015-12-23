@@ -20,8 +20,8 @@ export default function createReader (dbDir) {
         .map((v) => ({ ...v, t: moment(v.t, [moment.ISO_8601]).toDate() }))
 
       lines.sort((r1, r2) => {
-        if (r1.getTime() === r2.getTime()) return 0
-        else if (r1 > r2) return -1
+        if (r1.t.getTime() === r2.t.getTime()) return 0
+        else if (r1.t > r2.t) return -1
         else return 1
       })
 

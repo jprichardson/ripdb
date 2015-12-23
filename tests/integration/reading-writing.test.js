@@ -6,9 +6,10 @@ import { setup, teardown } from '../_util'
 import streamify from 'stream-array'
 import toArray from 'stream-to-array'
 
-const N = 2
+const N = 10000
+const YEARS_HISTORY = 10
 // 10 years ago, Jan 1st
-const start = new Date((new Date()).getFullYear() - 10, 0, 1)
+const start = new Date((new Date()).getFullYear() - YEARS_HISTORY, 0, 1)
 const trimMillis = (date) => new Date(Math.floor(date.getTime() / 1000) * 1000)
 
 function createFixture () {
