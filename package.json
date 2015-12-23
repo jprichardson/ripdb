@@ -1,0 +1,30 @@
+{
+  "name": "ripdb",
+  "version": "0.0.0",
+  "description": "JavaScript embeddable JSON time series database.",
+  "main": "index.js",
+  "scripts": {
+    "test": "standard"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jprichardson/ripdb.git"
+  },
+  "keywords": [
+    "time",
+    "series",
+    "database",
+    "db",
+    "JSON",
+    "embed",
+    "embeddable",
+    "date",
+    "electron"
+  ],
+  "author": "JP Richardson",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jprichardson/ripdb/issues"
+  },
+  "homepage": "https://github.com/jprichardson/ripdb#readme"
+}

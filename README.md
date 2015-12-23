@@ -1,15 +1,15 @@
-Winkle
-======
+RipDB
+=====
 
-[![build status](https://api.travis-ci.org/jprichardson/winkle.svg)](http://travis-ci.org/jprichardson/winkle)
-[![windows build status](https://ci.appveyor.com/api/projects/status/github/jprichardson/winkle?branch=master&svg=true)](https://ci.appveyor.com/project/jprichardson/winkle/branch/master)
+[![build status](https://api.travis-ci.org/jprichardson/ripdb.svg)](http://travis-ci.org/jprichardson/ripdb)
+[![windows build status](https://ci.appveyor.com/api/projects/status/github/jprichardson/ripdb?branch=master&svg=true)](https://ci.appveyor.com/project/jprichardson/ripdb/branch/master)
 
-A 100% JavaScript embeddable time series database.
+A 100% JavaScript embeddable JSON time series database.
 
 
 ### Name
 
-The name "Winkle" is from [Rip Van Winkle](https://en.wikipedia.org/wiki/Rip_Van_Winkle).
+The name "Rip" in RipDB is from [Rip Van Winkle](https://en.wikipedia.org/wiki/Rip_Van_Winkle).
 
 
 ### Why?
@@ -17,6 +17,9 @@ The name "Winkle" is from [Rip Van Winkle](https://en.wikipedia.org/wiki/Rip_Van
 Often times it's useful to have data indexed by date/time. Examples of such data would be
 log data, stock data, etc. There are plenty of time series databases, however, none that
 I'm aware of that are embeddable.
+
+RipDB is useful if you're building an [Electron](https://github.com/atom/electron)
+app and you don't want to recompile LevelUp for every target platform.
 
 
 ### Design Goals
@@ -39,7 +42,7 @@ Usage
 
 ### Install
 
-    npm i --save winkle
+    npm i --save ripdb
 
 
 ### API
@@ -49,15 +52,15 @@ Usage
 create(path, [indexFn])
 
 **Parameters:**
-- `path`: The path directory to read / write a Winkle database.
+- `path`: The path directory to read / write a RipDB database.
 - `indexFn`: Optional function to use for indexing. Defaults to returning a path that indexes
 like `${path}/YYYY/mm-dd.ndjson`. Files should easily fit in memory.
 
-**Returns:** An instance of Winkle.
+**Returns:** An instance of RipDB.
 
 ```js
-var winkle = require('winkle')
-var db = winkle.create('~/data/stocks')
+var ripdb = require('ripdb')
+var db = ripdb.create('~/data/stocks')
 ```
 
 #### prototype.path
@@ -68,8 +71,8 @@ Returns an instance of [Readable stream](https://nodejs.org/api/stream.html#stre
 from the database. Start
 
 ```js
-var winkle = require('winkle')
-var db = winkle.create('~/data/stocks')
+var ripdb = require('ripdb')
+var db = ripdb.create('~/data/stocks')
 var reader = db.createReader()
 
 reader.on('readable', function () {
@@ -86,8 +89,8 @@ Will support middleware, JSON revivers, etc.
 Returns an instance of a [Writable stream](https://nodejs.org/api/stream.html#stream_class_stream_writable) used to write data.
 
 ```js
-var winkle = require('winkle')
-var db = winkle.create('~/data/stocks')
+var ripdb = require('ripdb')
+var db = ripdb.create('~/data/stocks')
 var writer = db.createWriter()
 
 writer.write({
