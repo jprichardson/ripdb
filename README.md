@@ -25,7 +25,7 @@ app and you don't want to recompile LevelUp for every target platform.
 ### Design Goals
 
 - No native modules, 100% embeddable.
-- Super simple file format. Indexed (typically by day) newline delimited JSON (.ndjson) with two top level fields
+- Super simple file format. Indexed (typically by day) newline delimited JSON (`.ndjson`) with two top level fields
 `d`, and `t`.
 - Simple interface. Node.js streams only to read or write.
 
@@ -49,7 +49,7 @@ Usage
 
 #### create()
 
-create(path, [indexFn])
+`create(path, [indexFn])`
 
 **Parameters:**
 - `path`: The path directory to read / write a RipDB database.
@@ -68,7 +68,7 @@ var db = ripdb.create('~/data/stocks')
 #### prototype.createReader()
 
 Returns an instance of [Readable stream](https://nodejs.org/api/stream.html#stream_class_stream_readable) used to read data
-from the database. Start
+from the database. Starts from the most recent.
 
 ```js
 var ripdb = require('ripdb')
@@ -83,6 +83,7 @@ reader.on('readable', function () {
 ```
 
 Will support middleware, JSON revivers, etc.
+
 
 #### prototype.createWriter()
 
