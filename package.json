@@ -1,6 +1,6 @@
 {
   "name": "ripdb",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "JavaScript embeddable JSON time series database.",
   "main": "lib/index.js",
   "jsnext:main": "src/index.js",
