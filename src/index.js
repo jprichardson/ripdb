@@ -9,7 +9,7 @@ export default class RipDB {
   }
 
   createReader () {
-    
+
   }
 
   createWriter () {
