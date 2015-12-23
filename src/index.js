@@ -1,3 +1,5 @@
+import createWriter from './writer'
+
 export default class RipDB {
   static create (path, indexFn) {
     return new RipDB(path, indexFn)
@@ -6,6 +8,7 @@ export default class RipDB {
   constructor (path, indexFn) {
     this._path = path
     this._indexFn = indexFn
+    this._writer = createWriter(path)
   }
 
   createReader () {
@@ -13,7 +16,7 @@ export default class RipDB {
   }
 
   createWriter () {
-
+    return this._writer
   }
 
   get path () {

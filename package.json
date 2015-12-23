@@ -6,7 +6,7 @@
   "jsnext:main": "src/index.js",
   "scripts": {
     "build": "babel src -d lib",
-    "test": "npm run build && standard && tape -r babel-core/register test/**.test.js | tap-spec"
+    "test": "npm run build && standard && tape -r babel-core/register tests/*.test.js tests/integration/*.test.js | tap-spec"
   },
   "repository": {
     "type": "git",
@@ -33,14 +33,27 @@
     "babel-cli": "^6.3.17",
     "babel-eslint": "^4.1.6",
     "babel-preset-es2015-node4": "^2.0.2",
+    "babel-preset-stage-2": "^6.3.13",
     "fs-extra": "^0.26.3",
+    "lodash.sortby": "^3.1.5",
     "ospath": "^1.1.0",
-    "standard": "^5.4.1"
+    "randomdate": "0.0.1",
+    "standard": "^5.4.1",
+    "stream-array": "^1.1.1",
+    "stream-to-array": "^2.2.0",
+    "tap-spec": "^4.1.1",
+    "tape": "^4.3.0"
   },
   "standard": {
     "parser": "babel-eslint",
     "ignore": [
       "lib/"
     ]
+  },
+  "dependencies": {
+    "cfs": "^0.5.0",
+    "klaw": "^1.1.2",
+    "moment": "^2.10.6",
+    "ymd": "^1.0.0"
   }
 }

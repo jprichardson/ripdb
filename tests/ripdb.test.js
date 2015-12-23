@@ -2,7 +2,7 @@ import test from 'tape'
 import RipDB from '../'
 import { setup, teardown } from './_util'
 
-test('create an instance of RipDB', function (t) {
+test('WW create an instance of RipDB', function (t) {
   let testDir = setup()
 
   let db = RipDB.create(testDir)
