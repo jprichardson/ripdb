@@ -5,8 +5,6 @@ import RipDB from '../../'
 import { setup, teardown, dateRange } from '../_util'
 import streamify from 'stream-array'
 import toArray from 'stream-to-array'
-import ymd from 'ymd'
-import path from 'path'
 
 const N = 10000
 
@@ -23,16 +21,7 @@ test('write a bunch of records and then sequentially read them all', function (t
   const fixture = createFixture()
   t.is(fixture.length, N, `fixture length is ${N}`)
 
-  let indexFn = (data, encoding) => {
-    // TODO: this sucks for performance
-    let da = JSON.parse(data)
-    let d = ymd(new Date(da.t))
-    let dir = path.join(testDir, d.year, d.month)
-
-    return path.join(dir, d.ymd + '.ndjson')
-  }
-
-  let db = RipDB.create(testDir, indexFn)
+  let db = RipDB.create(testDir)
   let writer = db.createWriter()
 
   streamify(fixture).pipe(writer)

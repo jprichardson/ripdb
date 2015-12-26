@@ -23,13 +23,9 @@ test('write a bunch of records using an indexFn and then sequentially read them 
   const fixture = createFixture()
   t.is(fixture.length, N, `fixture length is ${N}`)
 
-  let indexFn = (data, encoding) => {
-    // TODO: this sucks for performance
-    let da = JSON.parse(data)
-    let d = ymd(new Date(da.t))
-    let dir = path.join(testDir, d.year)
-
-    return path.join(dir, d.month + '.ndjson')
+  let indexFn = (date) => {
+    let { year, month } = ymd(date)
+    return path.join(year, month + '.ndjson')
   }
 
   let db = RipDB.create(testDir, indexFn)

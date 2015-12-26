@@ -6,6 +6,7 @@ RipDB
 
 A 100% JavaScript embeddable JSON time series database.
 
+**API is unstable.**
 
 ### Name
 

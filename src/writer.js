@@ -4,18 +4,22 @@ import moment from 'moment'
 import path from 'path'
 import ymd from 'ymd'
 
-// TODO: need to find a way to get time field as data to path resolver is a buffer
-let prfn = (baseDir) => (data, encoding) => {
-  // TODO: this sucks for performance
-  let da = JSON.parse(data)
-  let d = ymd(new Date(da.t))
-  let dir = path.join(baseDir, d.year, d.month)
-
-  return path.join(dir, d.ymd + '.ndjson')
+const defaultIndexFn = (date) => {
+  assert(date instanceof Date, 'must pass date')
+  let { year, month, _ymd } = ymd(date)
+  return path.join(year, month, _ymd + '.ndjson')
 }
 
-export default function createWriter (dbDir, indexFn = prfn(dbDir)) {
-  let writer = cfs.createWriteStream(indexFn, { flags: 'a+' })
+let prfn = (baseDir, indexFn) => (data, encoding) => {
+  // TODO: this sucks for performance
+  let da = JSON.parse(data)
+  let file = indexFn(moment(da.t, [moment.ISO_8601]).toDate())
+  return path.join(baseDir, file)
+}
+
+export default function createWriter (dbDir, indexFn = defaultIndexFn) {
+  const cfsFn = prfn(dbDir, indexFn)
+  let writer = cfs.createWriteStream(cfsFn, { flags: 'a+' })
 
   let oldWrite = writer.write
   writer.write = function ({ t, d }) {
