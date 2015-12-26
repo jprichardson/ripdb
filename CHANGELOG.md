@@ -1,4 +1,4 @@
-x.y.z / 2015-12-xx
+0.0.2 / 2015-12-26
 ------------------
 - bugfix when file contains more than one record
 - proper index functions
