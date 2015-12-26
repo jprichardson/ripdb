@@ -8,8 +8,7 @@ export default class RipDB {
 
   constructor (path, indexFn) {
     this._path = path
-    this._indexFn = indexFn
-    this._writer = createWriter(path)
+    this._writer = createWriter(path, indexFn)
   }
 
   createReader () {

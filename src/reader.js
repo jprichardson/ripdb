@@ -17,7 +17,7 @@ export default function createReader (dbDir) {
       let lines = data
         .trim().split('\n')
         .map((v) => JSON.parse(v))
-        .map((v) => ({ ...v, t: moment(v.t, [moment.ISO_8601]).toDate() }))
+        .map((v) => ({ ...v, t: moment(v.t, [moment.ISO_8601]).toDate(), f: path.relative(dbDir, fileItem.path) }))
 
       lines.sort((r1, r2) => {
         if (r1.t.getTime() === r2.t.getTime()) return 0

@@ -1,20 +1,18 @@
 import test from 'tape'
-import randomdate from 'randomdate'
+import deepEqual from 'deep-equal'
 import sortby from 'lodash.sortby'
 import RipDB from '../../'
-import { setup, teardown } from '../_util'
+import { setup, teardown, dateRange } from '../_util'
 import streamify from 'stream-array'
 import toArray from 'stream-to-array'
+import ymd from 'ymd'
+import path from 'path'
 
 const N = 10000
-const YEARS_HISTORY = 10
-// 10 years ago, Jan 1st
-const start = new Date((new Date()).getFullYear() - YEARS_HISTORY, 0, 1)
-const trimMillis = (date) => new Date(Math.floor(date.getTime() / 1000) * 1000)
 
 function createFixture () {
-  return sortby(Array.from(Array(N))
-    .map((v, i) => ({ t: trimMillis(randomdate(start)) })), 't')
+  return sortby(dateRange(N)
+    .map((v, i) => ({ t: v })), 't')
     .map((v, i) => ({ ...v, d: i }))
 }
 
@@ -25,10 +23,17 @@ test('write a bunch of records and then sequentially read them all', function (t
   const fixture = createFixture()
   t.is(fixture.length, N, `fixture length is ${N}`)
 
-  let db = RipDB.create(testDir)
-  let writer = db.createWriter()
+  let indexFn = (data, encoding) => {
+    // TODO: this sucks for performance
+    let da = JSON.parse(data)
+    let d = ymd(new Date(da.t))
+    let dir = path.join(testDir, d.year, d.month)
 
-  // fixture.forEach((rec) => writer.write(rec))
+    return path.join(dir, d.ymd + '.ndjson')
+  }
+
+  let db = RipDB.create(testDir, indexFn)
+  let writer = db.createWriter()
 
   streamify(fixture).pipe(writer)
   .on('error', (err) => teardown(testDir, () => t.end(err)))
@@ -40,7 +45,12 @@ test('write a bunch of records and then sequentially read them all', function (t
 
       // come out most recent first
       ;[].reverse.call(results)
-      t.same(fixture, results, 'input same as output')
+
+      let res = results.every((rec, i) => (
+        rec.t.getTime() === fixture[i].t.getTime() && deepEqual(rec.d, results[i].d)
+      ))
+
+      t.true(res, 'input same as output')
 
       teardown(testDir, t.end)
     })
