@@ -3,7 +3,8 @@ RipDB
 
 [![build status](https://api.travis-ci.org/jprichardson/ripdb.svg)](http://travis-ci.org/jprichardson/ripdb)
 [![windows build status](https://ci.appveyor.com/api/projects/status/github/jprichardson/ripdb?branch=master&svg=true)](https://ci.appveyor.com/project/jprichardson/ripdb/branch/master)
-[![npm][https://img.shields.io/npm/v/ripdb.svg?style=flat]][https://npmjs.org/package/ripdb]([![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/))
+[![npm](https://img.shields.io/npm/v/ripdb.svg?style=flat)](https://npmjs.org/package/ripdb)
+[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
 
 A 100% JavaScript embeddable JSON time series database.
 
